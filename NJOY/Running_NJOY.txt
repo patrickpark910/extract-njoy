@@ -1,0 +1,9 @@
+cd NJOY2016-2016.69
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ../
+make -j8
+sudo make install
+make test
+
+Reference: https://www.physicsforums.com/threads/running-the-tests-njoy16-in-ubuntu-terminal.1049760/
