@@ -1,0 +1,27 @@
+1. Create virtual environment (venv) in Command Prompt (Windows) or Terminal (Mac)
+> python3 -m venv <virtual-environment-name>
+
+example:
+> python -m venv C:\MCNP\pppl-emma
+
+
+2. Activate venv
+> \Path\to\Scripts\activate
+
+3. Install packages
+> python -m pip install <package-name>
+
+4. Generate requirements file
+> python -m pip freeze > requirements.txt
+
+
+5. Use requirements file
+> python -m pip install -r requirements.txt
+
+6. Deactivate venv
+> deactivate
+
+
+
+MAT codes from
+https://www-nds.iaea.org/public/download-endf/TENDL-2017/Original/iso-mat.tendl-n.txt
