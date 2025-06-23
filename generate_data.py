@@ -7,6 +7,9 @@ import numpy as numpy
 import pandas as pd
 from jinja2 import Template
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'Python'))
+from utilities import *
+
 
 """ 
 Put in duples of ZAID, MT that you want interpolated
@@ -15,13 +18,14 @@ ENDF Reaction Numbers (MT):
    18 = fission
   102 = absorption (fission + capture)
 """ 
-TARGETS = [('U238',102),]
+TARGETS =  [('Li6',102),] # ('U238',102),]
+
+TOLERANCE = 0.001 # njoy default = 0.001 / my default = 0.00001
 
 
 def main():
     """ Import and configure xs data
     """
-
     with open("./Data/endf_mat_lookup.csv") as f:
         mat_lookup = dict(csv.reader(f))
 
@@ -29,20 +33,29 @@ def main():
         nuclide, reaction = target
 
         try:
+            nuclide = format_nuclide(nuclide)
             mat = int(mat_lookup[nuclide])
+            print(f"\n\nRunning EXTRACT-NJOY for nuclide {nuclide} (MAT {mat}) for reaction MT={reaction}.")
         except:
-            print(f" Fatal. ENDF MAT lookup for nuclide {nuclide} failed.")
+            print(f"Fatal. ENDF MAT lookup for nuclide {nuclide} failed.")
             sys.exit(2)
 
         current_run = Reaction(nuclide,mat,reaction)
 
         current_run.create_paths()
 
+        if current_run.csv_output not in os.listdir(f"./NJOY/"):
+            current_run.copy_endf()
+            current_run.run_njoy()
+            current_run.read_njoy()
+
+        """
         if "tape22" not in os.listdir(f"./NJOY/{current_run.njoy_subfolder}"):
             current_run.run_njoy()
 
         if "tape22" in os.listdir(f"./NJOY/{current_run.njoy_subfolder}"):
             current_run.read_njoy()
+        """
 
 
 class Reaction:
@@ -53,9 +66,11 @@ class Reaction:
         self.E_min, self.E_max = E_min, E_max
         self.datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        self.njoy_subfolder = f"{self.nuc}_mt{self.mt}"
+        # self.njoy_subfolder = f"{self.nuc}_mt{self.mt}"
+        self.njoy_workdir = f"./NJOY/temp"
         self.njoy_input = f"njoy_{self.nuc}_mt{self.mt}.inp"
         self.csv_output = f"{self.nuc}_mt{self.mt}.csv"
+
 
     def split_zaid(self):
         m = re.match(r'^([A-Za-z]+)(\d+)$', self.nuc)
@@ -66,48 +81,56 @@ class Reaction:
         self.I, self.A = m.groups()
         return letters, numbers
 
+
     def create_paths(self):
         """ Assign filepaths and create directories if they do not exist
         """
-        paths_to_create = ["./NJOY/","./NJOY/temp/",f"./NJOY/{self.njoy_subfolder}","./Results/"] 
-        if os.path.exists("./NJOY/temp/"):
-            shutil.rmtree("./NJOY/temp/")
+        paths_to_create = [self.njoy_workdir,]  # f"./NJOY/{self.njoy_subfolder}",
+        if os.path.exists(self.njoy_workdir):
+            shutil.rmtree(self.njoy_workdir)
         for path in paths_to_create:
             if not os.path.exists(path):
                 os.makedirs(path, exist_ok=True)
+
 
     def copy_endf(self):
         """ 
         Copies over necessary .endf file from ./Data/ENDF-B-VIII.1_neutrons 
         into NJOY run directory as tape20 (ex. ./NJOY/U238-mt102/tape20)
         """
+        self.Z, self.X, self.A = split_zaid(self.nuc)
+
         try:
             # Define paths
-            src = f"./Data/ENDF-B-VIII.1_neutrons/n-{self.Z}_{self.I}_{self.A}.endf"
-            dst = os.path.join(f"./NJOY/{self.njoy_subfolder}", 'tape20')
+            src = f"./Data/ENDF-B-VIII.1_neutrons/n-{self.Z}_{self.X}_{self.A}.endf"
+            dst = os.path.join(f"{self.njoy_workdir}", 'tape20') 
+            # not sure if Python will always recognize 'tape20' as a file and not dir... -ppark
             
             # Check if source file exists
             if not os.path.exists(src):
-                raise FileNotFoundError(f" Fatal. ENDF file not found: {src}")
+                raise FileNotFoundError(f"ENDF file not found: {src}")
             
             # os.makedirs(destination_dir, exist_ok=True) # Create destination directory if it doesn't exist
-            shutil.move(src, dst) # Move and rename
+            shutil.copy(src, dst) # Move and rename
             
             print(f"Moved '{src}' to '{dst}'")
             
         except PermissionError:
-            print(" Fatal. Permission denied. Check file/directory permissions.")
+            print("Fatal. Permission denied. Check file/directory permissions.")
+            sys.exit(2)
         except Exception as e:
-            print(f" Fatal. Unexpected error: {e}")
+            print(f"Fatal. {e}")
+            sys.exit(2)
+
 
     def write_njoy(self):
         """ Fills out NJOY template
         """
-
         self.parameters = {"datetime" : self.datetime,
                            "nuc" : self.nuc,
                            "mat" : self.mat,
                            "mt"  : self.mt,
+                           "tol": TOLERANCE,
                            "E_min": self.E_min,
                            "E_max": self.E_max,
                            }
@@ -119,9 +142,14 @@ class Reaction:
             self.print_input = False
             print(f" Comment. NJOY template written: {self.input_filepath}")
 
+
     def run_njoy(self):
-        cmd = f"njoy < {self.njoy_input}"
-        os.system(cmd)
+        try:
+            cmd = f"njoy < {self.njoy_input}"
+            os.system(cmd)
+        except:
+            print(f"Fatal. Error running NJOY: {cmd}")
+            sys.exit(2)
 
 
     def read_njoy(self):
@@ -131,7 +159,7 @@ class Reaction:
         data = []
 
         try:
-            with open(f"./NJOY/{self.njoy_subfolder}/tape22", 'r') as infile:
+            with open(f"{self.njoy_workdir}/tape22", 'r') as infile:
                 for line in infile:
                     m = pattern.match(line)
                     if m:
@@ -140,7 +168,7 @@ class Reaction:
                         # e = float(m.group(1)); xs = float(m.group(2))
                         # data.append((e, xs))
         except:
-            print(f" Fatal. Error reading ./NJOY/{self.njoy_subfolder}/tape22")
+            print(f"Fatal. Error reading {self.njoy_workdir}/tape22")
             sys.exit(2)
 
         # Write to CSV
@@ -150,11 +178,10 @@ class Reaction:
                 writer.writerow(['energy_eV', 'xs_barns'])
                 writer.writerows(data)
         except:
-            print(f" Fatal. Error writing ./Results/{self.csv_output}")
+            print(f"Fatal. Error writing ./Results/{self.csv_output}")
             sys.exit(2)
 
         return print(f" Wrote to ./Results/{self.csv_output}")
-
 
 
 if __name__ == '__main__':

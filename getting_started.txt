@@ -7,16 +7,18 @@ example:
 
 2. Activate venv
 > \Path\to\Scripts\activate
+Unix
+source ./Python/venv/Scripts/activate
 
 3. Install packages
-> python -m pip install <package-name>
+> pip install <package-name>
 
 4. Generate requirements file
-> python -m pip freeze > requirements.txt
+> pip freeze > requirements.txt
 
 
 5. Use requirements file
-> python -m pip install -r requirements.txt
+> pip install -r requirements.txt
 
 6. Deactivate venv
 > deactivate
@@ -25,3 +27,10 @@ example:
 
 MAT codes from
 https://www-nds.iaea.org/public/download-endf/TENDL-2017/Original/iso-mat.tendl-n.txt
+
+
+
+pip freeze
+pip show <package>
+pip uninstall <package>
+pip install -r requirements.txt
