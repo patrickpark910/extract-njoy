@@ -46,6 +46,7 @@ def main():
 
         if current_run.csv_output not in os.listdir(f"./NJOY/"):
             current_run.copy_endf()
+            current_run.write_njoy()
             current_run.run_njoy()
             current_run.read_njoy()
 
@@ -113,7 +114,7 @@ class Reaction:
             # os.makedirs(destination_dir, exist_ok=True) # Create destination directory if it doesn't exist
             shutil.copy(src, dst) # Move and rename
             
-            print(f"Moved '{src}' to '{dst}'")
+            print(f"Copied '{src}' to '{self.njoy_workdir}' as 'tape20'.")
             
         except PermissionError:
             print("Fatal. Permission denied. Check file/directory permissions.")
@@ -137,19 +138,30 @@ class Reaction:
 
         with open("./NJOY/njoy.template", 'r') as njoy_template:
             template_str = njoy_template.read()
-            template = Template(template_str) # + '\n' + tally_str)
-            template.stream(**self.parameters).dump(self.input_filepath)
+            template = Template(template_str) 
+            template.stream(**self.parameters).dump(f"{self.njoy_workdir}/{self.njoy_input}")
             self.print_input = False
-            print(f" Comment. NJOY template written: {self.input_filepath}")
+            print(f" Comment. NJOY template written: {self.njoy_workdir}/{self.njoy_input}")
 
 
     def run_njoy(self):
+        try:
+            prev = os.getcwd()
+            os.chdir(f"{self.njoy_workdir}")
+        except:
+            print(f"Fatal. Error changing cwd from {prev} to {self.njoy_workdir}.")
+
         try:
             cmd = f"njoy < {self.njoy_input}"
             os.system(cmd)
         except:
             print(f"Fatal. Error running NJOY: {cmd}")
             sys.exit(2)
+
+        try:
+            os.chdir(f"{prev}")
+        except:
+            print(f"Fatal. Error changing cwd from {os.getcwd()} to {prev}.")
 
 
     def read_njoy(self):
