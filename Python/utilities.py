@@ -3,6 +3,7 @@ Bunch of generic helper functions needed to process ENDF data
 """
 import re, csv
 
+
 with open("./Data/element_lookup.csv", newline='') as f:
     reader = csv.DictReader(f)
     ELEMENTS = { row['X']: int(row['Z']) for row in reader }
@@ -49,4 +50,4 @@ def split_zaid(N):
 """ For testing
 """
 if __name__ == '__main__':
-    print(split_zaid("H001"))
+    print(format_nuclide("U238"))

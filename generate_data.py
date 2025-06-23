@@ -15,12 +15,22 @@ from utilities import *
 Put in duples of ZAID, MT that you want interpolated
 
 ENDF Reaction Numbers (MT):
+    1 = total (sum of 2, 4, 5, 11, 16-18, 22-26, 28-37, 41-42, 44-45, 102-117)
+        (try not to use MT=1 bc it will run each sub reaction and add up)
+    2 = total elastic scattering
+    4 = total inelastic scattering (sum 50-91)
    18 = fission
-  102 = absorption (fission + capture)
+   19 = prompt neutron yield
+  102 = radiative capture (n,gamma)
+  105 = triton production (n,t)
+        (T production is formally 33+36+105+116 [(n,nt)+(n,nt2a)+(n,t)+(n,pt)] 
+        but most isotopes have no 33, 36, 116 data bc they are 0)
 """ 
-TARGETS =  [('Li6',102),] # ('U238',102),]
+TARGETS =  [('U235',2),('U235',18),('U235',102), 
+            ('U238',2),('U238',18),('U238',102), 
+            ('Pb208',102)] # ('U238',1),]
 
-TOLERANCE = 0.001 # njoy default = 0.001 / my default = 0.00001
+TOLERANCE = 0.0001 # njoy default = 0.001 / my default = 0.00001
 
 
 def main():
@@ -132,6 +142,7 @@ class Reaction:
                            "mat" : self.mat,
                            "mt"  : self.mt,
                            "tol": TOLERANCE,
+                           "temp_idx" : 1,
                            "E_min": self.E_min,
                            "E_max": self.E_max,
                            }
@@ -185,15 +196,19 @@ class Reaction:
 
         # Write to CSV
         try:
-            with open(f"./Results/{self.csv_output}", 'w', newline='') as outfile:
+            with open(f"./NJOY/{self.csv_output}", 'w', newline='') as outfile:
+                print('oopsie woopsie')
                 writer = csv.writer(outfile)
+                print('fucky wucky')
                 writer.writerow(['energy_eV', 'xs_barns'])
+                print('sum ting wong')
                 writer.writerows(data)
+                # print(data)
         except:
-            print(f"Fatal. Error writing ./Results/{self.csv_output}")
+            print(f"Fatal. Error writing ./NJOY/{self.csv_output}")
             sys.exit(2)
-
-        return print(f" Wrote to ./Results/{self.csv_output}")
+        
+        print(f" Wrote to ./NJOY/{self.csv_output}")
 
 
 if __name__ == '__main__':

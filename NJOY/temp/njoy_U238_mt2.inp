@@ -1,0 +1,22 @@
+reconr / resonance reconstruction
+20 21 /  tape input, output
+'job'/   job title
+9237 1 / mat, temp (K)
+0.0001 / tolerance
+'job'/ descriptive card
+0/ end RECONR input
+plotr
+22/              output file
+/                default page style
+1/               new axes, new curve
+'job'/         title line 1
+/                no line 2 for titles
+4/               log-log
+1e-05 20000000.0/          x-axis range
+/                default label
+1e-10 1e10/          y-axis range
+/                default label
+8 21 9237 3 2/ data source for curve
+/                default curve style
+99/              finished
+stop

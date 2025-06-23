@@ -1,0 +1,22 @@
+reconr                     resonance reconstruction
+20 21                     
+'92-U-235'/   job title
+9228 1/                   MAT 9237 (U-238), temperature index 1 (0 K) 
+0.001 /                    tolerance = 0.1% (controls grid fineness)
+'fission xs'/              descriptive card
+0/                        end RECONR input
+plotr
+22/              output file
+/                default page style
+1/               new axes, new curve
+'92-U-235'/         title line 1
+/                no line 2 for titles
+4/               log-log
+1e-05 20000000 /          x-axis range
+/                default label
+1e-10 1e10/          y-axis range
+/                default label
+8 21 9228 3 18/ data source for curve
+/                default curve style
+99/              finished
+stop
