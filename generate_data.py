@@ -30,7 +30,7 @@ TARGETS =  [('U235',2),('U235',18),('U235',102),
             ('U238',2),('U238',18),('U238',102), 
             ('Pb208',102)] # ('U238',1),]
 
-TOLERANCE = 0.0001 # njoy default = 0.001 / my default = 0.00001
+TOLERANCE = 0.00001 # njoy default = 0.001 / my default = 0.00001
 
 
 def main():
@@ -197,11 +197,11 @@ class Reaction:
         # Write to CSV
         try:
             with open(f"./NJOY/{self.csv_output}", 'w', newline='') as outfile:
-                print('oopsie woopsie')
+                # print('oopsie woopsie')
                 writer = csv.writer(outfile)
-                print('fucky wucky')
+                # print('fucky wucky')
                 writer.writerow(['energy_eV', 'xs_barns'])
-                print('sum ting wong')
+                # print('sum ting wong')
                 writer.writerows(data)
                 # print(data)
         except:

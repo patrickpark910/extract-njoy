@@ -5,7 +5,7 @@
  *   $$$$ $$       $$  $$   $$    $$$$     *  data        *  site: lanl t2   *
  *   $$ $$$$  $$   $$  $$   $$     $$      *  processing  *  mach:           *
  *   $$  $$$  $$$$$$$  $$$$$$$     $$      *  system      *  date: 06/23/25  *
- *   $$   $$   $$$$$    $$$$$      $$      *              *  time: 04:41:12  *
+ *   $$   $$   $$$$$    $$$$$      $$      *              *  time: 04:50:48  *
  *                                         *              *                  *
  *****************************************************************************
 
@@ -22,86 +22,387 @@
  ------------------------------------------------------------------
   ENDF/B-VIII.1                                                      
 
- material to be processed .............       9237
+ material to be processed .............       8237
  reconstruction tolerance .............      0.000
  reconstruction temperature ...........       0.00k
- resonance-integral-check tolerance ...      0.001
- max resonance-integral error .........  5.000E-09
+ resonance-integral-check tolerance ...      0.000
+ max resonance-integral error .........  5.000E-10
 
  descriptive cards for pendf tape
  ------------------------------------------------------------------
  job                                                                 
  
 
- processing mat 9237 in endf-6 format
+ processing mat 8237 in endf-6 format
  ------------------------------------------------------------------
-  92-U -238 IAEA/ORNL  EVAL-MAR23 INDEN Consortium, ORNL, LANL       
+  82-Pb-208 RPI, LANL  EVAL-Aug23 P.J. Brain                         
 
  resonance range information
  ----------------------------------
  ier     energy-range     lru lrf  method
-  1  1.000E-05 2.000E+04   1   3   normal
-  2  2.000E+04 1.500E+05   2   2   normal
+  1  1.000E-05 1.500E+06   1   3   normal
+
+ ---message from rdf2bw---calculation of angular distribution not installed.
    samm max legendre order:  0
 
- changed threshold from 6.179071E+06 to 6.179072E+06 for mt 16.
+ mat has no unresolved resonance parameters
 
- changed threshold from 1.132679E+07 to 1.132680E+07 for mt 17.
+ changed threshold from 7.403735E+06 to 7.404167E+06 for mt 16.
 
- changed threshold from 4.510632E+04 to 4.510633E+04 for mt 51.
+ changed threshold from 1.417428E+07 to 1.417429E+07 for mt 17.
 
- changed threshold from 1.490087E+05 to 1.490088E+05 for mt 52.
+ changed threshold from 7.009466E+06 to 7.009467E+06 for mt 24.
 
- changed threshold from 3.084816E+05 to 3.084817E+05 for mt 53.
+ changed threshold from 8.042523E+06 to 8.042524E+06 for mt 28.
 
- changed threshold from 5.202953E+05 to 5.202954E+05 for mt 54.
+ changed threshold from 1.269233E+07 to 1.269234E+07 for mt 32.
 
- changed threshold from 6.829918E+05 to 6.829919E+05 for mt 55.
+ changed threshold from 1.294012E+07 to 1.294013E+07 for mt 33.
 
- changed threshold from 7.350313E+05 to 7.350314E+05 for mt 56.
+ changed threshold from 1.446172E+07 to 1.446174E+07 for mt 34.
 
- changed threshold from 7.791876E+05 to 7.791877E+05 for mt 57.
+ changed threshold from 2.230028E+07 to 2.230029E+07 for mt 37.
 
- changed threshold from 8.301426E+05 to 8.301427E+05 for mt 58.
+ changed threshold from 1.492774E+07 to 1.492775E+07 for mt 41.
 
- changed threshold from 9.311388E+05 to 9.311389E+05 for mt 59.
+ changed threshold from 2.627202E+06 to 2.627203E+06 for mt 51.
 
- changed threshold from 9.344929E+05 to 9.344930E+05 for mt 60.
+ changed threshold from 3.213220E+06 to 3.213221E+06 for mt 52.
 
- changed threshold from 9.541458E+05 to 9.541459E+05 for mt 61.
+ changed threshold from 3.491932E+06 to 3.491933E+06 for mt 53.
 
- changed threshold from 9.702237E+05 to 9.702238E+05 for mt 62.
+ changed threshold from 3.726437E+06 to 3.726438E+06 for mt 54.
 
- changed threshold from 9.704044E+05 to 9.704045E+05 for mt 63.
+ changed threshold from 3.938977E+06 to 3.938978E+06 for mt 55.
 
- changed threshold from 1.001455E+06 to 1.001456E+06 for mt 64.
+ changed threshold from 3.965580E+06 to 3.965581E+06 for mt 56.
 
- changed threshold from 1.001807E+06 to 1.001808E+06 for mt 65.
+ changed threshold from 3.980170E+06 to 3.980171E+06 for mt 57.
 
- changed threshold from 1.032356E+06 to 1.032357E+06 for mt 66.
+ changed threshold from 4.015079E+06 to 4.015080E+06 for mt 58.
 
- changed threshold from 1.041645E+06 to 1.041646E+06 for mt 67.
+ changed threshold from 4.056579E+06 to 4.056580E+06 for mt 59.
 
- changed threshold from 1.060856E+06 to 1.060857E+06 for mt 68.
+ changed threshold from 4.064618E+06 to 4.064619E+06 for mt 60.
 
- changed threshold from 1.062212E+06 to 1.062213E+06 for mt 69.
+ changed threshold from 4.070145E+06 to 4.070146E+06 for mt 61.
 
- changed threshold from 1.064150E+06 to 1.064151E+06 for mt 70.
+ changed threshold from 4.105214E+06 to 4.105215E+06 for mt 62.
 
- changed threshold from 1.064763E+06 to 1.064764E+06 for mt 71.
+ changed threshold from 4.125914E+06 to 4.125915E+06 for mt 63.
 
- changed threshold from 1.081262E+06 to 1.081263E+06 for mt 72.
+ changed threshold from 4.145317E+06 to 4.145318E+06 for mt 64.
 
- changed threshold from 1.110395E+06 to 1.110396E+06 for mt 73.
+ changed threshold from 4.161083E+06 to 4.161084E+06 for mt 65.
 
- changed threshold from 1.133623E+06 to 1.133624E+06 for mt 74.
+ changed threshold from 4.179171E+06 to 4.179172E+06 for mt 66.
 
- changed threshold from 1.135541E+06 to 1.135542E+06 for mt 75.
+ changed threshold from 4.200685E+06 to 4.200686E+06 for mt 67.
 
- changed threshold from 1.140512E+06 to 1.140513E+06 for mt 76.
+ changed threshold from 4.225796E+06 to 4.225797E+06 for mt 68.
 
- changed threshold from 1.155576E+06 to 1.155577E+06 for mt 77.
+ changed threshold from 4.250013E+06 to 4.250014E+06 for mt 69.
 
- changed threshold from 1.155877E+06 to 1.155878E+06 for mt 78.
+ changed threshold from 4.250515E+06 to 4.250516E+06 for mt 70.
 
- changed threshold from 1.167928E+06 to 1.167929E+06 for mt 79.
+ changed threshold from 4.274129E+06 to 4.274130E+06 for mt 71.
+
+ changed threshold from 4.283072E+06 to 4.283073E+06 for mt 72.
+
+ changed threshold from 4.317006E+06 to 4.317007E+06 for mt 73.
+
+ changed threshold from 4.338942E+06 to 4.338943E+06 for mt 74.
+
+ changed threshold from 4.344167E+06 to 4.344168E+06 for mt 75.
+
+ changed threshold from 4.379598E+06 to 4.379599E+06 for mt 76.
+
+ changed threshold from 4.404157E+06 to 4.404158E+06 for mt 77.
+
+ changed threshold from 4.424354E+06 to 4.424355E+06 for mt 78.
+
+ changed threshold from 4.443446E+06 to 4.443447E+06 for mt 79.
+
+ changed threshold from 4.465553E+06 to 4.465554E+06 for mt 80.
+
+ changed threshold from 4.484645E+06 to 4.484646E+06 for mt 81.
+
+ changed threshold from 4.502230E+06 to 4.502231E+06 for mt 82.
+
+ changed threshold from 4.599198E+06 to 4.599199E+06 for mt 83.
+
+ changed threshold from 4.632358E+06 to 4.632359E+06 for mt 84.
+
+ changed threshold from 4.648436E+06 to 4.648437E+06 for mt 85.
+
+ changed threshold from 4.702698E+06 to 4.702699E+06 for mt 86.
+
+ changed threshold from 4.720986E+06 to 4.720987E+06 for mt 87.
+
+ changed threshold from 4.733848E+06 to 4.733849E+06 for mt 88.
+
+ changed threshold from 4.785095E+06 to 4.785096E+06 for mt 89.
+
+ changed threshold from 4.853425E+06 to 4.853426E+06 for mt 90.
+
+ changed threshold from 4.936167E+06 to 4.936168E+06 for mt 91.
+
+ changed threshold from 4.236935E+06 to 4.236936E+06 for mt600.
+
+ changed threshold from 4.276986E+06 to 4.276987E+06 for mt601.
+
+ changed threshold from 4.566566E+06 to 4.566566E+06 for mt602.
+
+ changed threshold from 4.712631E+06 to 4.712631E+06 for mt603.
+
+ changed threshold from 4.732165E+06 to 4.732166E+06 for mt604.
+
+ changed threshold from 4.856927E+06 to 4.856928E+06 for mt605.
+
+ changed threshold from 4.860344E+06 to 4.860344E+06 for mt606.
+
+ changed threshold from 4.938320E+06 to 4.938321E+06 for mt607.
+
+ changed threshold from 5.000621E+06 to 5.000621E+06 for mt608.
+
+ changed threshold from 5.029761E+06 to 5.029762E+06 for mt609.
+
+ changed threshold from 5.040815E+06 to 5.040815E+06 for mt610.
+
+ changed threshold from 5.043829E+06 to 5.043830E+06 for mt611.
+
+ changed threshold from 5.377439E+06 to 5.377440E+06 for mt612.
+
+ changed threshold from 5.441750E+06 to 5.441751E+06 for mt613.
+
+ changed threshold from 5.487973E+06 to 5.487974E+06 for mt614.
+
+ changed threshold from 5.565346E+06 to 5.565347E+06 for mt615.
+
+ changed threshold from 5.605540E+06 to 5.605541E+06 for mt616.
+
+ changed threshold from 5.653773E+06 to 5.653774E+06 for mt617.
+
+ changed threshold from 5.718084E+06 to 5.718084E+06 for mt618.
+
+ changed threshold from 5.769331E+06 to 5.769332E+06 for mt619.
+
+ changed threshold from 5.881874E+06 to 5.881875E+06 for mt620.
+
+ changed threshold from 5.896947E+06 to 5.896948E+06 for mt621.
+
+ changed threshold from 5.941160E+06 to 5.941161E+06 for mt622.
+
+ changed threshold from 5.973315E+06 to 5.973316E+06 for mt623.
+
+ changed threshold from 6.020543E+06 to 6.020544E+06 for mt624.
+
+ changed threshold from 6.021548E+06 to 6.021549E+06 for mt649.
+
+ changed threshold from 5.807109E+06 to 5.807110E+06 for mt650.
+
+ changed threshold from 6.159872E+06 to 6.159873E+06 for mt651.
+
+ changed threshold from 7.161828E+06 to 7.161828E+06 for mt652.
+
+ changed threshold from 7.497849E+06 to 7.497850E+06 for mt653.
+
+ changed threshold from 8.495776E+06 to 8.495777E+06 for mt654.
+
+ changed threshold from 8.529167E+06 to 8.529168E+06 for mt655.
+
+ changed threshold from 8.733061E+06 to 8.733062E+06 for mt656.
+
+ changed threshold from 8.806817E+06 to 8.806818E+06 for mt657.
+
+ changed threshold from 8.926595E+06 to 8.926596E+06 for mt658.
+
+ changed threshold from 8.965453E+06 to 8.965454E+06 for mt659.
+
+ changed threshold from 9.032677E+06 to 9.032678E+06 for mt660.
+
+ changed threshold from 9.095541E+06 to 9.095542E+06 for mt661.
+
+ changed threshold from 9.118592E+06 to 9.118593E+06 for mt662.
+
+ changed threshold from 9.159318E+06 to 9.159319E+06 for mt663.
+
+ changed threshold from 9.181094E+06 to 9.181094E+06 for mt664.
+
+ changed threshold from 9.297958E+06 to 9.297958E+06 for mt665.
+
+ changed threshold from 9.382365E+06 to 9.382366E+06 for mt666.
+
+ changed threshold from 9.383370E+06 to 9.383371E+06 for mt699.
+
+ changed threshold from 6.404651E+06 to 6.404652E+06 for mt700.
+
+ changed threshold from 6.671772E+06 to 6.671773E+06 for mt701.
+
+ changed threshold from 6.711025E+06 to 6.711027E+06 for mt702.
+
+ changed threshold from 7.042750E+06 to 7.042752E+06 for mt703.
+
+ changed threshold from 7.057220E+06 to 7.057222E+06 for mt704.
+
+ changed threshold from 7.209897E+06 to 7.209898E+06 for mt705.
+
+ changed threshold from 7.349119E+06 to 7.349120E+06 for mt706.
+
+ changed threshold from 7.361439E+06 to 7.361440E+06 for mt707.
+
+ changed threshold from 7.407662E+06 to 7.407663E+06 for mt708.
+
+ changed threshold from 7.489487E+06 to 7.489488E+06 for mt709.
+
+ changed threshold from 7.527570E+06 to 7.527572E+06 for mt710.
+
+ changed threshold from 7.616500E+06 to 7.616501E+06 for mt711.
+
+ changed threshold from 7.667747E+06 to 7.667748E+06 for mt712.
+
+ changed threshold from 7.744116E+06 to 7.744117E+06 for mt713.
+
+ changed threshold from 7.771548E+06 to 7.771549E+06 for mt714.
+
+ changed threshold from 7.811441E+06 to 7.811442E+06 for mt715.
+
+ changed threshold from 7.816937E+06 to 7.816938E+06 for mt716.
+
+ changed threshold from 7.864698E+06 to 7.864699E+06 for mt717.
+
+ changed threshold from 7.884795E+06 to 7.884796E+06 for mt718.
+
+ changed threshold from 7.901676E+06 to 7.901677E+06 for mt719.
+
+ changed threshold from 8.034216E+06 to 8.034217E+06 for mt720.
+
+ changed threshold from 8.043561E+06 to 8.043562E+06 for mt721.
+
+ changed threshold from 8.061648E+06 to 8.061649E+06 for mt722.
+
+ changed threshold from 8.123477E+06 to 8.123478E+06 for mt723.
+
+ changed threshold from 8.213380E+06 to 8.213382E+06 for mt724.
+
+ changed threshold from 8.257594E+06 to 8.257595E+06 for mt725.
+
+ changed threshold from 8.397268E+06 to 8.397269E+06 for mt726.
+
+ changed threshold from 8.402292E+06 to 8.402294E+06 for mt727.
+
+ changed threshold from 8.472632E+06 to 8.472633E+06 for mt728.
+
+ changed threshold from 8.493633E+06 to 8.493634E+06 for mt729.
+
+ changed threshold from 8.494638E+06 to 8.494639E+06 for mt749.
+
+ changed threshold from 7.699926E+06 to 7.699928E+06 for mt750.
+
+ changed threshold from 8.773307E+06 to 8.773308E+06 for mt751.
+
+ changed threshold from 9.812523E+06 to 9.812524E+06 for mt752.
+
+ changed threshold from 9.813527E+06 to 9.813529E+06 for mt799.
+
+ changed threshold from 7.404167E+06 to 7.404167E+06 for mt 16.
+
+ changed threshold from 9.045444E+06 to 9.045445E+06 for mt 16.
+
+ number of user and resonance nodes           =     430
+ points in initial unionized grid             =    1908
+ points added by linearization                =    4944                   0.1s
+
+               estimated maximum error due to
+               resonance integral check (errmax,errint)
+
+    upper      elastic   percent   capture   percent   fission   percent
+    energy     integral   error    integral   error    integral   error
+  1.00E-05
+  1.00E-04     2.60E+01   0.000    1.62E-02   0.001    0.00E+00   0.000
+  1.00E-03     2.60E+01   0.000    5.11E-03   0.001    0.00E+00   0.000
+  1.00E-02     2.60E+01   0.000    1.62E-03   0.001    0.00E+00   0.000
+  1.00E-01     2.60E+01   0.000    5.11E-04   0.003    0.00E+00   0.000
+  1.00E+00     2.60E+01   0.000    1.62E-04   0.004    0.00E+00   0.000
+  2.00E+00     7.83E+00   0.000    2.19E-05   0.002    0.00E+00   0.000
+  5.00E+00     1.04E+01   0.000    1.94E-05   0.000    0.00E+00   0.000
+  1.00E+01     7.83E+00   0.000    9.79E-06   0.000    0.00E+00   0.000
+  2.00E+01     7.83E+00   0.000    6.93E-06   0.000    0.00E+00   0.000
+  5.00E+01     1.04E+01   0.000    6.15E-06   0.000    0.00E+00   0.000
+  1.00E+02     7.83E+00   0.000    3.11E-06   0.000    0.00E+00   0.000
+  2.00E+02     7.83E+00   0.000    2.21E-06   0.000    0.00E+00   0.000
+  5.00E+02     1.03E+01   0.000    1.99E-06   0.000    0.00E+00   0.000
+  1.00E+03     7.82E+00   0.000    1.04E-06   0.000    0.00E+00   0.000
+  2.00E+03     7.81E+00   0.000    7.75E-07   0.000    0.00E+00   0.000
+  5.00E+03     1.03E+01   0.000    7.82E-07   0.000    0.00E+00   0.000
+  1.00E+04     7.74E+00   0.000    5.11E-07   0.000    0.00E+00   0.000
+  2.00E+04     7.65E+00   0.000    5.41E-07   0.000    0.00E+00   0.000
+  5.00E+04     9.83E+00   0.000    1.29E-04   0.028    0.00E+00   0.000
+  1.00E+05     8.46E+00   0.000    1.96E-04   0.000    0.00E+00   0.000
+  2.00E+05     6.53E+00   0.000    8.04E-04   0.020    0.00E+00   0.000
+  5.00E+05     6.49E+00   0.000    3.33E-04   0.016    0.00E+00   0.000
+  1.00E+06     3.71E+00   0.001    1.37E-03   0.016    0.00E+00   0.000
+
+ points added by resonance reconstruction     =  133255
+ points affected by resonance integral check  =  102923
+ final number of resonance points             =  138682
+ number of points in final unionized grid     =  140107
+                                                                          1.9s
+ *****************************************************************************
+
+ plotr...plot endf, pendf, gendf, or input data                           1.9s
+
+ lori .................................          1
+ istyle ...............................          2
+ size .................................      0.300
+ ipcol ................................          0
+
+ -------------------------------------------------
+
+ iplot ................................          1
+ iwcol ................................          0
+ factx ................................   1.00E+00
+ facty ................................   1.00E+00
+ xll ..................................      0.000
+ yll ..................................      0.000
+ ww ...................................     10.000
+ wh ...................................      7.500
+ wr ...................................      0.000
+
+            job                                                         
+                                                                        
+
+ itype ................................          4
+ jtype ................................          0
+ igrid ................................          2
+ ileg .................................          0
+
+ xlo ..................................   1.00E-05
+ xhi ..................................   2.00E+07
+ xstep ................................   1.00E+00
+ xlabel ...                                                             
+
+ ylo ..................................   1.00E-10
+ yhi ..................................   1.00E+10
+ ystep ................................   1.00E+00
+ ylabel ...                                                             
+
+ iverf ................................          8
+ nin ..................................         21
+ matd .................................       8237
+ mfd ..................................          3
+ mtd ..................................        102
+ temp .................................   0.00E+00
+ nth ..................................          1
+ ntp ..................................          1
+ nkh ..................................          1
+
+ icon .................................          0
+ isym .................................          0
+ idash ................................          0
+ iccol ................................          0
+ ithick ...............................          1
+ ishade ...............................          0
+
+                                                                          2.0s
+ *****************************************************************************

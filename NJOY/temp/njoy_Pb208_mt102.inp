@@ -1,8 +1,8 @@
 reconr / resonance reconstruction
 20 21 /  tape input, output
 'job'/   job title
-9237 1 / mat, temp (K)
-0.0001 / tolerance
+8237 1 / mat, temp (K)
+1e-05 / tolerance
 'job'/ descriptive card
 0/ end RECONR input
 plotr
@@ -16,7 +16,7 @@ plotr
 /                default label
 1e-10 1e10/          y-axis range
 /                default label
-8 21 9237 3 2/ data source for curve
+8 21 8237 3 102/ data source for curve
 /                default curve style
 99/              finished
 stop
