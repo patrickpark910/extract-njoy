@@ -9,8 +9,6 @@ A Python wrapper to easily extract linearized nuclear cross sections from NJOY. 
 - [Code Flow](#code-flow)
 - [Miscellaneous](#miscellaneous)
 - [Theory](#theory)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -22,7 +20,7 @@ A Python wrapper to easily extract linearized nuclear cross sections from NJOY. 
 2. Create and activate a virtual environment:
    ```bash
    python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate (with no 'source' in front)
    ```
 3. Install dependencies:
    ```bash
@@ -34,25 +32,48 @@ A Python wrapper to easily extract linearized nuclear cross sections from NJOY. 
 Open `generate_data.py` and adjust the nuclide, reaction, and tolerance you want:
 
 ```python
-TARGETS =  [('U238',1,0.00001), ('Li6',18,0.1)]
+TARGETS =  [('U238',1,0.00001), ('Li6',18,0.1)] # njoy default = 0.001 (0.1%)
 ```
 
-Then run `generate_data.py`:
+I recommend using the NJOY default tolerance of 0.001 (0.1%) for $1/v$ cross sections. Only crank down the tolerance for resonances.
+
+Then activate the virtual environment (if you haven't already) and run `generate_data.py`:
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate # On Windows: venv\Scripts\activate
+source venv/bin/activate # On Windows: venv\Scripts\activate (with no 'source' in front)
 python3 generate_data.py
+```
+
+You should see something like this, e.g., for U-238 fission (MAT = 9237, MT = 18):
+
+```bash
+Running EXTRACT-NJOY for nuclide U238 (MAT 9237) for reaction MT=18.
+Copied './Data/ENDF-B-VIII.1_neutrons/n-092_U_238.endf' to './NJOY/temp' as 'tape20'.
+NJOY template written: ./NJOY/temp/njoy_U238_mt18.inp
+
+ njoy 2016.78  03Feb25                                       06/23/25 04:43:23
+ *****************************************************************************
+ reconr...                                                                0.0s
+ plotr...                                                               184.6s
+                                                                        187.2s
+ *****************************************************************************
+ Wrote to ./NJOY/U238_mt18.csv
 ```
 
 ## Code Flow
 
-1. **Input Parsing**: Reads NJOY input deck and configuration files.
-2. **Wrapper Invocation**: Calls the appropriate NJOY modules (e.g., `reconr`, `broadr`, `unresr`) via subprocess.
-3. **Output Collection**: Captures NJOY tape files (e.g., `tape21`, `tape22`) in a designated output directory.
-4. **Post-processing**: Parses the raw tape files into Python data structures (lists, dicts, Pandas DataFrames).
-5. **Error Handling**: Validates NJOY return codes and raises descriptive exceptions on failure.
-6. **Results Export**: Saves processed data to CSV.
+If you are curious what's happening under the hood, here's basically what happens:
+
+1. `generate_data.py` reads the list of (isotope, reaction) data you want and iterates through them in a `for` loop. For each (isotope, reaction), it creates the `Reaction` class.
+
+2. The `Reaction` class sets up all the other ENDF parameters you need, e.g., the isotope's `MAT` code and the reaction's `MT` code in ENDF-6 format. It then streams all these parameters to `njoy.template` using the `Jinja2` package. The `njoy.template` is basically a template with  specific parameters blanked out like this `{{ E_min }}` that `Jinja2` fills in with the information of the reaction in the `Reaction` class. 
+
+   (NB. "ENDF" means two things: Evaluated Nuclear Data **Format**, which is what ENDF-6 is. Or, Evaluated Nuclear Data **File**, which is the library of cross sections themselves. In this repo, I use ENDF-6 format and ENDF/B.VIII.1 data.)
+
+3. Once the NJOY input is written, the code executes it.
+
+4. Once NJOY is done, we read `tape22`, extract the linearized data, and write it as a CSV.
 
 ## Miscellaneous
 Some tips and tricks (mainly reminders for myself for useful things when writing this)
@@ -63,9 +84,11 @@ Some tips and tricks (mainly reminders for myself for useful things when writing
 
 This wrapper interfaces with the NJOY nuclear data processing system to:
 
-- **Reconstruct cross sections** (`RECONR` module) at specified temperatures and tolerances.
-- **Doppler broadening** (`BROADR`) for thermal reactor applications. Doppler broadening generally should not affect 1/v cross sections.
-- **Resonance reconstruction** (`UNRESR`) to handle unresolved resonance regions.
+- Reconstruct cross sections (`RECONR` module) at specified temperatures and tolerances.
+- Doppler broadening (`BROADR`) for thermal reactor applications. Doppler broadening generally should not affect 1/v cross sections.
+- Resonance reconstruction (`UNRESR`) to handle unresolved resonance regions.
+
+Here is more theory 
 
 The Python wrapper abstracts these Fortran-based modules, enabling:
 
