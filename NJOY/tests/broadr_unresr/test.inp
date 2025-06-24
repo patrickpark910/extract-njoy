@@ -11,15 +11,6 @@ broadr / doppler broaden and thin neutron point cross sections
 0.001 / tol doesnt need to be same but lanl recs same as reconr
 293.6 / temp in K
 0 / terminate 
-unresr
-20 22 23 /
-9228 1
-293.6 / temp in K
-
-9443 3 7 1/
-293.6 900 2100/
-1.e10 1.e5 1.e4 1000. 100. 10. 1/
-0/
 plotr
 22/              output file
 /                default page style
