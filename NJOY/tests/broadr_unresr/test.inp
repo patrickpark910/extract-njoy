@@ -1,18 +1,18 @@
 reconr /                    resonance reconstruction
 20 21 /                    
 '92-U-238'/   job title
-9228 1/                   MAT 9237 (U-238), temperature index 1 (0 K) 
+9237 1/                   MAT 9237 (U-238), temperature index 1 (0 K) 
 0.001 /                    tolerance = 0.1% (controls grid fineness)
 'fission xs'/              descriptive card
 0/                        end RECONR input
 broadr / doppler broaden and thin neutron point cross sections
 20 21 22 / 
-9228 1 /
+9237 1 /
 0.001 / tol doesnt need to be same but lanl recs same as reconr
-293.6 / temp in K
+900 / temp in K
 0 / terminate 
 plotr
-22/              output file
+23/              output file
 /                default page style
 1/               new axes, new curve
 '92-U-238'/         title line 1
@@ -22,7 +22,7 @@ plotr
 /                default label
 1e-10 1e10/          y-axis range
 /                default label
-8 21 9228 3 18/ data source for curve
+8 22 9237 3 18 900/ data source for curve
 /                default curve style
 99/              finished
 stop

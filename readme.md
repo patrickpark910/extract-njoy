@@ -83,8 +83,18 @@ I understand my wrapper doesn't use NJOY as efficiently as possible, but ngl I h
 Some tips and tricks (mainly reminders for myself for useful things when writing this)
 
 - Reconstruct cross sections (`RECONR` module) at specified temperatures and tolerances.
+
 - Doppler broadening (`BROADR`) for thermal reactor applications. Doppler broadening generally should not affect 1/v cross sections.
+
 - Resonance reconstruction (`UNRESR`) to handle unresolved resonance regions.
+
+  
+
+  
+
+### Working with ENDF
+
+- [You can look up ENDF `MAT` codes for nuclides here.](https://www-nds.iaea.org/public/download-endf/TENDL-2017/Original/iso-mat.tendl-n.txt)
 
 ### Installing NJOY21
 
@@ -110,7 +120,11 @@ Some tips and tricks (mainly reminders for myself for useful things when writing
   sudo apt install gfortran
   ```
 
-  
+
+### Working with NJOY21
+
+- [You can find NJOY test problems here](https://www.njoy21.io/NJOY2016/testDescription.html) for you to base your input decks off of.
+- 
 
 ## Theory
 
