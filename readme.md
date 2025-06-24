@@ -63,22 +63,26 @@ NJOY template written: ./NJOY/temp/njoy_U238_mt18.inp
 
 ## Code Flow
 
-If you are curious what's happening under the hood, here's basically what happens:
+If you are curious about what's under the hood, here's basically what happens:
 
-1. `generate_data.py` reads the list of (isotope, reaction) data you want and iterates through them in a `for` loop. For each (isotope, reaction), it creates the `Reaction` class.
+1. `generate_data.py` reads the list of (isotope, reaction, temperature) data you want and iterates through them in a `for` loop. For each (isotope, reaction, temperature), henceforth called "problem," it creates the `Reaction` class.
 
-2. The `Reaction` class sets up all the other ENDF parameters you need, e.g., the isotope's `MAT` code and the reaction's `MT` code in ENDF-6 format. It then streams all these parameters to `njoy.template` using the `Jinja2` package. The `njoy.template` is basically a template with  specific parameters blanked out like this `{{ E_min }}` that `Jinja2` fills in with the information of the reaction in the `Reaction` class. 
+2. The `Reaction` class sets up all the other problem parameters you need, e.g., the isotope's `MAT` code and the reaction's `MT` code in ENDF-6 format. It then streams all these parameters to `njoy.template` using the `Jinja2` package. The `njoy.template` is a NJOY input with specific parameters blanked out like this: `{{ E_min }}`. `Jinja2` fills in this template to create the specific NJOY input file for the problem. 
 
    (NB. "ENDF" means two things: Evaluated Nuclear Data **Format**, which is what ENDF-6 is. Or, Evaluated Nuclear Data **File**, which is the library of cross sections themselves. In this repo, I use ENDF-6 format and ENDF/B.VIII.1 data.)
 
-3. Once the NJOY input is written, the code executes it.
+3. Once the NJOY input is written, it is executed. Fortran has hardcoded input and output files, so `tape20` is the ENDF data, `tape21` is the result of `RECONR`, `tape 22` is that of `BROADR`
 
 4. Once NJOY is done, we read `tape22`, extract the linearized data, and write it as a CSV.
+
+I understand my wrapper doesn't use NJOY as efficiently as possible, but ngl I have little confidence (and time) in making NJOY run properly for more complicated inputs. This is also something you'll most likely run infrequently, so you can afford to sit for a few extra minutes, and simple = less time spent fixing if something goes wrong.
 
 ## Miscellaneous
 Some tips and tricks (mainly reminders for myself for useful things when writing this)
 
-
+- Reconstruct cross sections (`RECONR` module) at specified temperatures and tolerances.
+- Doppler broadening (`BROADR`) for thermal reactor applications. Doppler broadening generally should not affect 1/v cross sections.
+- Resonance reconstruction (`UNRESR`) to handle unresolved resonance regions.
 
 ## Theory
 
