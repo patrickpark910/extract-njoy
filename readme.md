@@ -14,15 +14,15 @@ A Python wrapper to easily extract linearized nuclear cross sections from NJOY. 
 
 1. Download (clone) the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
+   git clone https://github.com/patrickpark910/extract-njoy.git
+   cd extract-njoy
    ```
 2. Create and activate a virtual environment:
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate (with no 'source' in front)
    ```
-3. Install dependencies:
+3. Install Python dependencies:
    ```bash
    pip install -r requirements.txt
    ```
@@ -61,6 +61,8 @@ NJOY template written: ./NJOY/temp/njoy_U238_mt18.inp
  Wrote to ./NJOY/U238_mt18.csv
 ```
 
+The CSV should have the pointwise (E, $\sigma$) data you want to load, at a fine enough grid to linearly interpolate.
+
 ## Code Flow
 
 If you are curious about what's under the hood, here's basically what happens:
@@ -83,6 +85,32 @@ Some tips and tricks (mainly reminders for myself for useful things when writing
 - Reconstruct cross sections (`RECONR` module) at specified temperatures and tolerances.
 - Doppler broadening (`BROADR`) for thermal reactor applications. Doppler broadening generally should not affect 1/v cross sections.
 - Resonance reconstruction (`UNRESR`) to handle unresolved resonance regions.
+
+### Installing NJOY21
+
+- Download NJOY21 from [Los Alamos's repo here](https://github.com/njoy/NJOY21). If you are on Windows I highly suggest you use WSL (very easy to install). I tried and wasted like 8 hrs getting everything to work in Windows proper—it was a bit rough to finangle MSYS2, gcc, cmake, and fortran together.
+
+- If you have trouble with `cmake` in installing `NJOY21` then you can try (for Linux/WSL):
+
+  ```bash
+  sudo apt-get update && sudo apt-get install build-essential
+  ```
+
+- If you get an error that looks like below:
+
+  ```bash
+  -- The Fortran compiler identification is unknown
+  CMake Error at /usr/share/cmake-3.28/Modules/CMakeDetermineFortranCompiler.cmake:341 (configure_file):
+    Operation not permitted
+  ```
+
+  you probably don't have `gfortran` installed. Fix with (for Linux/WSL):
+
+  ```bash
+  sudo apt install gfortran
+  ```
+
+  
 
 ## Theory
 

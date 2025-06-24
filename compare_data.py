@@ -2,12 +2,11 @@ import numpy as numpy
 import matplotlib.pyplot as plt
 from matplotlib.ticker import LogLocator
 import pandas as pd
-import pyne
 
 def main():
     """ Import and configure xs data
     """
-    datapath = "./Data/u238_fis.txt"
+    datapath = "./Data/u238_fis.csv"
     data = pd.read_csv(datapath, header=None, skiprows=1, names=['E','xs']) # skips first line
     data_E, data_xs = data['E'].tolist(), data['xs'].tolist()
     plt.rcParams["font.family"] = "Arial"
@@ -30,12 +29,12 @@ def plot(x, y, er, filename=None, show=False):
 
     """ Naive linear interpolation (connect-the-dots)
     """
-    ax.plot(x, y, linewidth=1, label='linear')
+    # ax.plot(x, y, linewidth=1, label='linear')
 
 
     """ OpenMC (5 interpolation schemes)
     """
-    ax.plot(x, y, linewidth=1, label='linear')
+    # ax.plot(x, y, linewidth=1, label='linear')
 
 
     """ Plot settings
@@ -64,7 +63,7 @@ def plot(x, y, er, filename=None, show=False):
         ax.set_xlim(E_inter,E_fast)
         ax.set_ylim(1e-5,1e0)
 
-    if filename: fig.savefig(filename, format="pdf", bbox_inches='tight')
+    # if filename: fig.savefig(filename, format="pdf", bbox_inches='tight')
     if show: plt.show()
 
 if __name__ == '__main__':
